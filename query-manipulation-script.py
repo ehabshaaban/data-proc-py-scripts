@@ -1,3 +1,6 @@
+const gitExtension = vscode.extensions.getExtension<GitExtension>('vscode.git').exports;
+const git = gitExtension.getAPI(1);
+
 from tkinter import *
 import os
 os.system('clear')
@@ -47,3 +50,8 @@ log_text_box.pack()
 get_query = Button(root, text='Get Queries',command=get_queries).pack()
 
 root.mainloop()
+
+if True:
+    pass
+else:
+    print(None)
