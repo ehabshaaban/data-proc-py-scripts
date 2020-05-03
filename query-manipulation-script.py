@@ -1,6 +1,3 @@
-const gitExtension = vscode.extensions.getExtension<GitExtension>('vscode.git').exports;
-const git = gitExtension.getAPI(1);
-
 from tkinter import *
 import os
 os.system('clear')
@@ -19,7 +16,7 @@ def get_queries():
     if len(log_line) == 0:
         print("str:",log_line)
         print("count:",len(log_line))
-        msg = Label(root, text="Enter first line in log file").pack()
+        msg = Label(root, text="Enter first line in log file", font="Tahoma").pack()
     
     else:
         print("str:",log_line)
@@ -47,11 +44,6 @@ log_text_box = Entry(root, width=30)
 log_text_box.insert(0, "Enter first line in log file")
 log_text_box.pack()
 
-get_query = Button(root, text='Get Queries',command=get_queries).pack()
+get_query = Button(root, text='Generate Queries',command=get_queries).pack()
 
 root.mainloop()
-
-if True:
-    pass
-else:
-    print(None)
