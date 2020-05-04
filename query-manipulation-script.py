@@ -1,17 +1,21 @@
 """List:Build copy/paste/cut/select all to work probably--
-        Make query text boxes dimmed--
-        Hit enter to generate
-"""
-#Importing TKinter module
-from tkinter import *
 
-#Setting up the GUI window
+        Make query text boxes dimmed--
+        Hit alternative enter to generateinsert from clipboard
+        select all + pasting --> pastes on the old text entered
+"""
+#Importing tKinter module
+from tkinter import *
+from tkinter import messagebox
+import pyperclip
+
+#Setting up GUI
 win = Tk()
 win.title("Query Generator")
 win.resizable(0,0)
 
 #Converting
-def get_queries():
+def get_queries(*args):
     if len(entry.get("1.0", "end-1c")) == 0:
         empty_box = "Text Box Is Empty!"
         print(empty_box)
@@ -20,7 +24,9 @@ def get_queries():
         output3.delete('1.0', END)
         output4.delete('1.0', END)
         entry.delete('1.0', END)
-        output1.insert(END, str(empty_box))
+        # output1.insert(END, str(empty_box))
+        messagebox.showwarning("Warning","Text Box Is Empty!")
+        return 'break'
     else: 
         text = entry.get("1.0",END)
         try:
@@ -28,7 +34,7 @@ def get_queries():
             jbase_value = re.search(jbase_pattern, text).group(1)
             oracle_pattern = "oracle file \[(.*?)]|\n"
             oracle_value = re.search(oracle_pattern, text).group(1)
-            print("str:",text)
+            print("Enty.Get:",text)
             print("count:",len(text))
             print("Jbase:", jbase_value)
             print("Oracle:", oracle_value)
@@ -37,11 +43,11 @@ def get_queries():
             output2.delete('1.0', END)
             output1.delete('1.0', END)
             entry.delete('1.0', END)
-            
             output1.insert(END, str(jbase_value))
             output2.insert(END, str(jbase_value))
             output3.insert(END, str(oracle_value))
             output4.insert(END, str(oracle_value))
+            return 'break'
         except:
             valid_data_msg = "Enter Valid Log Data!"
             print(valid_data_msg)
@@ -50,12 +56,14 @@ def get_queries():
             output3.delete('1.0', END)
             output4.delete('1.0', END)
             entry.delete('1.0', END)
-            output1.insert(END, str(valid_data_msg))
+            # output1.insert(END, str(valid_data_msg))
+            messagebox.showwarning("Warning","Enter Valid Log Data!")
+            return 'break'
 
 
-# def slct(event=None):
-#     entry.tag_add('sel', '1.0', 'end')
-#     return "break"
+def slct(event=None):
+    entry.tag_add('sel', '1.0', 'end')
+    return 'break'
 
 # def custom_paste(event):
 #     try:
@@ -79,6 +87,9 @@ output3 = Text(win, width=50, height=3, wrap=WORD)
 l5 = Label(win, text="Oracle Count Count Query:")
 output4 = Text(win, width=50, height=3, wrap=WORD)
 
+
+entry.bind("<Return>", get_queries)
+
 #Positioning the widgets
 l1.grid(row=1, column=1, padx=5, sticky=W)
 entry.grid(row=2, column=1, columnspan=2, padx=5, pady=(0,10))
@@ -93,13 +104,12 @@ l5.grid(row=10, column=1, padx=5, sticky=W)
 output4.grid(row=11, column=1, columnspan=2, padx=5, pady=(0,10))
 
 
-
-#Button activation
+#Button activation and binding
 button.configure(command=get_queries)
 
 #Build basic text functions
-# win.bind('<Control-a>',slct)
-# win.bind('<Control-A>',slct)
+win.bind('<Control-a>',slct)
+win.bind('<Control-A>',slct)
 # win.bind_all('<Control-a>', slct)
 # win.bind_all('<Control-A>', slct)
 # win.bind("<<Paste>>", custom_paste)
