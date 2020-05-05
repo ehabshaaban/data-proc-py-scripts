@@ -6,7 +6,8 @@
 --hit alternative enter
   to generate inseration
   from input box
---build better graphics
+--sticks on top apps/add about
+--handel history files
 
 
 --to get number of records
@@ -122,33 +123,53 @@ def custom_paste(event):
     return "break"
 """
 #Creating the widgets
-entry = Text(win, width=50, height=3, wrap=WORD)
+entry = Text(win, width=30, height=3, wrap=WORD)
 entry.insert(END, "Enter First Line In Log")
-button = Button(win, text="Generate", width=20)
-output1 = Label(text="Jbase Record Count Query",cursor="plus", relief=RAISED, pady=5, wraplength=500)
-output2 = Label(text="Jbase Column Count Query",cursor="plus", relief=RAISED, pady=5, wraplength=500)
-output3 = Label(text="Oracle Record Count Query",cursor="plus", relief=RAISED, pady=5, wraplength=500)
-output4 = Label(text="Oracle Count Count Query",cursor="plus", relief=RAISED, pady=5, wraplength=500)
+button = Button(win, text="Generate", width=8,font = ('Ubuntu Mono','15','bold'))
+info1 = Label(text="jbase RECORD count query", pady=5, wraplength=500,font=("Ubuntu Mono", 10))
+output1 = Label(text="                           ",cursor="plus", relief=RAISED, pady=5, wraplength=500,bg='white')
+info2 = Label(text="jbase COLUMN count query", pady=5, wraplength=500,font=("Ubuntu Mono", 10))
+output2 = Label(text="                           ",cursor="plus", relief=RAISED, pady=5, wraplength=500,bg='white')
+info3 = Label(text="oracle RECORD count query", pady=5, wraplength=500,font=("Ubuntu Mono", 10))
+output3 = Label(text="                           ",cursor="plus", relief=RAISED, pady=5, wraplength=500,bg='white')
+info4 = Label(text="oracle COLUMN count query", pady=5, wraplength=500,font=("Ubuntu Mono", 10))
+output4 = Label(text="                           ",cursor="plus", relief=RAISED, pady=5, wraplength=500,bg='white')
+emptySelect = Label(text="Empty Select",cursor="plus", relief=RAISED, pady=5, wraplength=500)
 
 #Positioning the widgets
 entry.grid(row=2, column=1, columnspan=2, padx=5, pady=(0,10))
 button.grid(row=3, column=1, columnspan=2, pady=5)
-output1.grid(row=5, column=1, columnspan=2, padx=5, pady=(0,10))
-output2.grid(row=7, column=1, columnspan=2, padx=5, pady=(0,10))
-output3.grid(row=9, column=1, columnspan=2, padx=5, pady=(0,10))
-output4.grid(row=11, column=1, columnspan=2, padx=5, pady=(0,10))
+info1.grid(row=5, column=1,sticky="NE")
+output1.grid(row=7, column=1, columnspan=2, padx=5, pady=(0,10))
+info2.grid(row=9, column=1,sticky="NE")
+output2.grid(row=11, column=1, columnspan=2, padx=5, pady=(0,10))
+info3.grid(row=13, column=1,sticky="NE")
+output3.grid(row=14, column=1, columnspan=2, padx=5, pady=(0,10))
+info4.grid(row=16, column=1,sticky="NE")
+output4.grid(row=18, column=1, columnspan=2, padx=5, pady=(0,10))
+emptySelect.grid(row=20, column=1, columnspan=2, padx=5, pady=(0,10))
 
-#Button activation
+#Configs
 button.configure(command=takingInput)
+output1.config(font=("Ubuntu Mono", 10))
+output2.config(font=("Ubuntu Mono", 10))
+output3.config(font=("Ubuntu Mono", 10))
+output4.config(font=("Ubuntu Mono", 10))
+emptySelect.config(font=("Ubuntu Mono", 10))
 
 #Bindings
 win.bind('<Control-a>',selectall)
 win.bind('<Control-A>',selectall)
 entry.bind("<Return>", takingInput)
+first_query = ""
+second_query = ""
+third_query = ""
+fourth_query = ""
 output1.bind("<Button-1>",lambda event:pyperclip.copy(first_query))
 output2.bind("<Button-1>",lambda event:pyperclip.copy(second_query))
 output3.bind("<Button-1>",lambda event:pyperclip.copy(third_query))
 output4.bind("<Button-1>",lambda event:pyperclip.copy(fourth_query))
+emptySelect.bind("<Button-1>",lambda event:pyperclip.copy("SELECT"))
 """
 win.bind_all('<Control-a>', selectall)
 win.bind_all('<Control-A>', selectall)
