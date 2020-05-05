@@ -125,7 +125,7 @@ def custom_paste(event):
 #Creating the widgets
 entry = Text(win, width=30, height=3, wrap=WORD)
 entry.insert(END, "Enter First Line In Log")
-button = Button(win, text="Generate", width=8,font = ('Ubuntu Mono','15','bold'))
+button = Button(win, text="Generate", width=8,font = ('Ubuntu Mono','15','bold'), fg='green')
 info1 = Label(text="jbase RECORD count query", pady=5, wraplength=500,font=("Ubuntu Mono", 10))
 output1 = Label(text="                           ",cursor="plus", relief=RAISED, pady=5, wraplength=500,bg='white')
 info2 = Label(text="jbase COLUMN count query", pady=5, wraplength=500,font=("Ubuntu Mono", 10))
