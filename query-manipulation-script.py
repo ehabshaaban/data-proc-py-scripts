@@ -7,7 +7,6 @@
   to generate inseration
   from input box
 --build better graphics
---build text_manipulation
 
 
 --to get number of records
@@ -16,8 +15,7 @@ ORACLE : Select Count(*) from T24.V_F_CONVERSION_PGMS;
 JBASE : SELECT F.CONVERSION.PGMS
 
 --to get number of columns 
-ORACLE : SELECT count(*) FROM ALL_TAB_COLUMNS WHERE 
-OWNER = 'T24' AND TABLE_NAME = 'V_F_CONVERSION_PGMS';
+ORACLE : SELECT count(*) FROM ALL_TAB_COLUMNS WHERE OWNER = 'T24' AND TABLE_NAME = 'V_F_CONVERSION_PGMS';
 
 JBASE : SELECT F.STANDARD.SELECTION SYS.FIELD.NAME WITH FILE.NAME EQ 'CONVERSION.PGMS'
 
@@ -27,9 +25,7 @@ ORACLE : Select PROGRAM_NAME from T24.V_F_CONVERSION_PGMS where RECID = 'G8'
 
 JBASE: LIST F.CONVERSION.PGMS PROGRAM.NAME WITH @ID = 'G8'
 
-
 """
-
 #Importing tKinter module
 from tkinter import *
 from tkinter import messagebox
@@ -44,29 +40,36 @@ win.resizable(0,0)
 def text_manipulation(jbase_value, oracle_value):
     global first_query
     global second_query
-    print(oracle_value[0], oracle_value[:5])
+    global third_query
+    global fourth_query
+
     if oracle_value[:5] == 'FBNK_':
-        print('FBNK')
-        #Building 1st query_With FBNK
+        print(oracle_value[:5])
+        #Building 1st query_With FBNK --> Jbase
         key=oracle_value[:5]
         table_name = str(jbase_value).replace("_",".")
         prefix = str(key).replace("_",".")
         first_query_table = prefix+table_name
         first_query = "SELECT "+first_query_table
-        #Building 2nd quey_With FBNK
+        #Building 2nd query_With FBNK --> Jbase
         second_query = "SELECT F.STANDARD.SELECTION SYS.FIELD.NAME WITH FILE.NAME EQ '"+table_name+"'"
-        
+       
     elif oracle_value[:2] == 'F_':
-        print('F')
-        #Building 1st query_With F
+        print(oracle_value[:2])
+        #Building 1st query_With F --> Jbase
         key=oracle_value[:2]
         table_name=str(jbase_value).replace("_",".")
         prefix=str(key).replace("_",".")
         first_query_table =  prefix+table_name
         first_query = "SELECT "+first_query_table
-        #Building 2nd quey_With F
+        #Building 2nd query_With F --> Jbase
         second_query = "SELECT F.STANDARD.SELECTION SYS.FIELD.NAME WITH FILE.NAME EQ '"+table_name+"'"
+        
+    #Building 3rd query --> Oracle
+    third_query = "SELECT COUNT(*) FROM T24.V_"+oracle_value+";"
 
+    #Building 4th query --> Oracle
+    fourth_query = "SELECT count(*) FROM ALL_TAB_COLUMNS WHERE OWNER = 'T24' AND TABLE_NAME = 'V_"+oracle_value+"';"
 
 def processing(text):
     global jbase_value
@@ -84,8 +87,8 @@ def processing(text):
                       oracle_value=oracle_value)
     output1.config(text=first_query)
     output2.config(text=second_query)
-    output3.config(text=oracle_value)
-    output4.config(text=oracle_value)
+    output3.config(text=third_query)
+    output4.config(text=fourth_query)
 
 def takingInput(*args):
     if len(entry.get("1.0", "end-1c")) == 0:
@@ -144,8 +147,8 @@ win.bind('<Control-A>',selectall)
 entry.bind("<Return>", takingInput)
 output1.bind("<Button-1>",lambda event:pyperclip.copy(first_query))
 output2.bind("<Button-1>",lambda event:pyperclip.copy(second_query))
-output3.bind("<Button-1>",lambda event:pyperclip.copy(oracle_value))
-output4.bind("<Button-1>",lambda event:pyperclip.copy(oracle_value))
+output3.bind("<Button-1>",lambda event:pyperclip.copy(third_query))
+output4.bind("<Button-1>",lambda event:pyperclip.copy(fourth_query))
 """
 win.bind_all('<Control-a>', selectall)
 win.bind_all('<Control-A>', selectall)
