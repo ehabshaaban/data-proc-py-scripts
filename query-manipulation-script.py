@@ -1,14 +1,8 @@
 """
---input box acts weird
-  (maybe custom paste
-  method needs to be
-  implemented )
 --hit alternative enter
   to generate inseration
   from input box
 --sticks on top apps/add about
---handel history files
-
 
 --to get number of records
 ORACLE : Select Count(*) from T24.V_F_CONVERSION_PGMS;
@@ -52,9 +46,7 @@ def text_manipulation(jbase_value, oracle_value):
         prefix = str(key).replace("_",".")
         first_query_table = prefix+table_name
         first_query = "SELECT "+first_query_table
-        #Building 2nd query_With FBNK --> Jbase
-        second_query = "SELECT F.STANDARD.SELECTION SYS.FIELD.NAME WITH FILE.NAME EQ '"+table_name+"'"
-       
+               
     elif oracle_value[:2] == 'F_':
         print(oracle_value[:2])
         #Building 1st query_With F --> Jbase
@@ -63,7 +55,13 @@ def text_manipulation(jbase_value, oracle_value):
         prefix=str(key).replace("_",".")
         first_query_table =  prefix+table_name
         first_query = "SELECT "+first_query_table
-        #Building 2nd query_With F --> Jbase
+
+        #Building 2nd query_With $HIS --> Jbase
+    if '$HIS' in str(jbase_value):
+        table_name_witout_his = table_name.replace('$HIS',"")
+        second_query = "SELECT F.STANDARD.SELECTION SYS.FIELD.NAME WITH FILE.NAME EQ '"+table_name_witout_his+"'"
+    else:
+        #Building 2nd query_Without $HIS --> Jbase
         second_query = "SELECT F.STANDARD.SELECTION SYS.FIELD.NAME WITH FILE.NAME EQ '"+table_name+"'"
         
     #Building 3rd query --> Oracle
@@ -113,15 +111,14 @@ def takingInput(*args):
 def selectall(event=None):
     entry.tag_add('sel', '1.0', 'end')
     return 'break'
-"""
+
 def custom_paste(event):
     try:
         entry.delete("sel.first", "sel.last")
     except:
         pass
-    entry.insert("insert", entry.clipboard_get())
     return "break"
-"""
+
 #Creating the widgets
 entry = Text(win, width=30, height=3, wrap=WORD)
 entry.insert(END, "Enter First Line In Log")
@@ -150,7 +147,7 @@ output4.grid(row=18, column=1, columnspan=2, padx=5, pady=(0,10))
 emptySelect.grid(row=20, column=1, columnspan=2, padx=5, pady=(0,10))
 
 #Configs
-button.configure(command=takingInput)
+button.config(command=takingInput)
 output1.config(font=("Ubuntu Mono", 10))
 output2.config(font=("Ubuntu Mono", 10))
 output3.config(font=("Ubuntu Mono", 10))
@@ -161,6 +158,8 @@ emptySelect.config(font=("Ubuntu Mono", 10))
 win.bind('<Control-a>',selectall)
 win.bind('<Control-A>',selectall)
 entry.bind("<Return>", takingInput)
+win.bind('<Control-v>',custom_paste)
+win.bind('<Control-V>',custom_paste)
 first_query = ""
 second_query = ""
 third_query = ""
@@ -170,9 +169,5 @@ output2.bind("<Button-1>",lambda event:pyperclip.copy(second_query))
 output3.bind("<Button-1>",lambda event:pyperclip.copy(third_query))
 output4.bind("<Button-1>",lambda event:pyperclip.copy(fourth_query))
 emptySelect.bind("<Button-1>",lambda event:pyperclip.copy("SELECT"))
-"""
-win.bind_all('<Control-a>', selectall)
-win.bind_all('<Control-A>', selectall)
-win.bind("<<Paste>>", custom_paste)
-"""
+
 win.mainloop()
