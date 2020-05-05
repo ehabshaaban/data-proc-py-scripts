@@ -170,4 +170,5 @@ output3.bind("<Button-1>",lambda event:pyperclip.copy(third_query))
 output4.bind("<Button-1>",lambda event:pyperclip.copy(fourth_query))
 emptySelect.bind("<Button-1>",lambda event:pyperclip.copy("SELECT"))
 
+#Application loop
 win.mainloop()
