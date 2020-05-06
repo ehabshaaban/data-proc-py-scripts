@@ -2,36 +2,16 @@
 --hit alternative enter
   to generate inseration
   from input box
---sticks on top apps/add about
-
---to get number of records
-ORACLE : Select Count(*) from T24.V_F_CONVERSION_PGMS;
-
-JBASE : SELECT F.CONVERSION.PGMS
-
---to get number of columns 
-ORACLE : SELECT count(*) FROM ALL_TAB_COLUMNS WHERE OWNER = 'T24' AND TABLE_NAME = 'V_F_CONVERSION_PGMS';
-
-JBASE : SELECT F.STANDARD.SELECTION SYS.FIELD.NAME WITH FILE.NAME EQ 'CONVERSION.PGMS'
-
-
---to get specific column in specific record
-ORACLE : Select PROGRAM_NAME from T24.V_F_CONVERSION_PGMS where RECID = 'G8'
-
-JBASE: LIST F.CONVERSION.PGMS PROGRAM.NAME WITH @ID = 'G8'
-
 """
 #Importing tKinter module
 from tkinter import *
 from tkinter import messagebox
-import pyperclip
 
 #Setting up GUI
 win = Tk()
 win.title("Query Generator")
 win.resizable(0,0)
 
-"""Needs More Unit Test Before Continue"""
 def text_manipulation(jbase_value, oracle_value):
     global first_query
     global second_query
@@ -125,6 +105,14 @@ def toggleAlwaysOnTop():
     else:
         win.attributes("-topmost", 0)
 
+def copy_to_clipboard(value):
+    win.clipboard_clear()
+    win.clipboard_append(value)
+
+def emptyselect_clipboard():
+    win.clipboard_clear()
+    win.clipboard_append("SELECT")
+
 def About():
     messagebox.showinfo("About","Developed in Python 3.0 for QCENTRIS GmbH")
 
@@ -173,11 +161,11 @@ first_query = ""
 second_query = ""
 third_query = ""
 fourth_query = ""
-output1.bind("<Button-1>",lambda event:pyperclip.copy(first_query))
-output2.bind("<Button-1>",lambda event:pyperclip.copy(second_query))
-output3.bind("<Button-1>",lambda event:pyperclip.copy(third_query))
-output4.bind("<Button-1>",lambda event:pyperclip.copy(fourth_query))
-emptySelect.bind("<Button-1>",lambda event:pyperclip.copy("SELECT"))
+output1.bind("<Button-1>",lambda event:copy_to_clipboard(first_query))
+output2.bind("<Button-1>",lambda event:copy_to_clipboard(second_query))
+output3.bind("<Button-1>",lambda event:copy_to_clipboard(third_query))
+output4.bind("<Button-1>",lambda event:copy_to_clipboard(fourth_query))
+emptySelect.bind("<Button-1>",lambda event:emptyselect_clipboard())
 
 #Options Menu
 menubar = Menu()
