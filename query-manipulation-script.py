@@ -170,5 +170,5 @@ optionsMenu.add_checkbutton(label="About", command=About)
 menubar.add_cascade(label="Options", menu=optionsMenu)
 win.config(menu=menubar)
 
-"""main loop for tk"""
+#Tkinter Main Loop
 win.mainloop()
