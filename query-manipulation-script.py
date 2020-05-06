@@ -1,8 +1,3 @@
-"""
---hit alternative enter
-  to generate inseration
-  from input box
-"""
 #Importing tKinter module
 from tkinter import *
 from tkinter import messagebox
