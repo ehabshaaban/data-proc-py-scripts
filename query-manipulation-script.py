@@ -119,6 +119,15 @@ def custom_paste(event):
         pass
     return "break"
 
+def toggleAlwaysOnTop():
+    if win.attributes("-topmost") == 0:
+        win.attributes("-topmost", 1)
+    else:
+        win.attributes("-topmost", 0)
+
+def About():
+    messagebox.showinfo("About","Developed in Python 3.0 for QCENTRIS GmbH")
+
 #Creating the widgets
 entry = Text(win, width=30, height=3, wrap=WORD)
 entry.insert(END, "Enter First Line In Log")
@@ -169,6 +178,14 @@ output2.bind("<Button-1>",lambda event:pyperclip.copy(second_query))
 output3.bind("<Button-1>",lambda event:pyperclip.copy(third_query))
 output4.bind("<Button-1>",lambda event:pyperclip.copy(fourth_query))
 emptySelect.bind("<Button-1>",lambda event:pyperclip.copy("SELECT"))
+
+#Options Menu
+menubar = Menu()
+optionsMenu = Menu(menubar, tearoff=0)
+optionsMenu.add_checkbutton(label="Always on top", command=toggleAlwaysOnTop)
+optionsMenu.add_checkbutton(label="About", command=About)
+menubar.add_cascade(label="Options", menu=optionsMenu)
+win.config(menu=menubar)
 
 """main loop for tk"""
 win.mainloop()
