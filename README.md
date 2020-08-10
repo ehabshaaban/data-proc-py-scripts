@@ -1,2 +1,3 @@
-# generate-java-variables
+# generate java variables
 python script to generate java variables used in an automation project instead of writing it manually.
+pandas & Python3 
