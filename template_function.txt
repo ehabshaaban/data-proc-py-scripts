@@ -12,7 +12,8 @@ public static MODULE_DATA[] getMODULE_DATA(String filePath, String sheetName) {
 
 			for (int i = 0 ; i<data.size() ; i++) {
 				MODULE_INSTANCE[i] = new MODULE_DATA();
-				MODULE_INSTANCE[i].setTestCaseID((data.get(i)).get(header.indexOf(MODULE_ENUM.TESTCASEID)))
+				
+				
 			}
 			closeExcel();
 			return MODULE_INSTANCE;
