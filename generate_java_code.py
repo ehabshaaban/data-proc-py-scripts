@@ -30,7 +30,7 @@ def generate_data_variables_and_enums(file_path, sheet_number):
 def generate_dynamic_java_lines():
     dynamic_list = []
     for element in range(len(header_list)):
-        basic_line = "				"+MODULE_INSTANCE+"[i].setTestCaseID((data.get(i)).get(header.indexOf("+MODULE_ENUM+"."+header_list[element].upper()+")))"
+        basic_line = "				"+MODULE_INSTANCE+"[i].setTestCaseID((data.get(i)).get(header.indexOf("+MODULE_ENUM+"."+header_list[element].upper()+")));"
         dynamic_list.append(basic_line)
     return dynamic_list
 
@@ -60,26 +60,22 @@ if __name__ == "__main__":
     
     """//\\//\\//\\//\\//\\//\\//\\//\\//\\"""
     # Data sheet path
-    file_path = "/home/ehab/Desktop/NBKE/nbkautomation/NBKAutomationIE/resources/TestData/Trade/LG_Issue_Operative/Trade_LG_Amend_Operative.xls"
+    file_path = "/home/ehab/Desktop/NBKE/nbkautomation/NBKAutomationIE/resources/TestData/Trade/Import_DC_Payment/Import_DC_Payment.xls"
     # Sheet number
     sheet_number = 'Sheet1'
     """//\\//\\//\\//\\//\\//\\//\\//\\//\\"""
     generate_data_variables_and_enums(file_path,sheet_number)
 
 
-
-
-
-    
     """The following variables are for generating read function
        Generated text file is read_function.txt"""
     
     """//\\//\\//\\//\\//\\//\\//\\//\\//\\"""
     # Data class name
-    MODULE_DATA = "TradeLGAmendOperativeData"
+    MODULE_DATA = "TradeImportDCPaymentData"
     # Instance variable from MODULE_DATA object
-    MODULE_INSTANCE = "lgAmendOperative"
+    MODULE_INSTANCE = "importDCPayment"
     # Enum class name
-    MODULE_ENUM = "TradeLGAmendOperativeEnum"
+    MODULE_ENUM = "TradeImportDCPaymentEnum"
     """//\\//\\//\\//\\//\\//\\//\\//\\//\\"""
     generate_read_function(MODULE_DATA,MODULE_INSTANCE,MODULE_ENUM)
