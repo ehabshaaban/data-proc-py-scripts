@@ -6,6 +6,9 @@ def generate_data_variables_and_enums(file_path, sheet_number):
     pd.options.display.max_rows = len(df.columns)
     header_values = df.columns.to_series().reset_index(drop=True)
     header_list = list(header_values)
+    print(header_list)
+    print(df)
+    print(header_values)
     enum_list =[]
     data_list = []
 
@@ -57,25 +60,23 @@ if __name__ == "__main__":
 
     """The following variables are for generating data variables in Data class & enum variables in Enum class
        Generated text files are enum_variables.txt & java_variables.txt"""
-    
-    """//\\//\\//\\//\\//\\//\\//\\//\\//\\"""
+
     # Data sheet path
-    file_path = "/home/ehab/Desktop/NBKE/nbkautomation/NBKAutomationIE/resources/TestData/Trade/Import_DC_Payment/Import_DC_Payment.xls"
+    file_path = "/home/ehab/Desktop/NBKE/nbkautomation/NBKAutomationIE/resources/TestData/Trade/Trade-Import-LC-Issuance-Verify-Auth/Trade-Import-LC-Issuance-Verify-Auth.xls"
     # Sheet number
     sheet_number = 'Sheet1'
-    """//\\//\\//\\//\\//\\//\\//\\//\\//\\"""
+
     generate_data_variables_and_enums(file_path,sheet_number)
 
 
     """The following variables are for generating read function
        Generated text file is read_function.txt"""
-    
-    """//\\//\\//\\//\\//\\//\\//\\//\\//\\"""
+
     # Data class name
-    MODULE_DATA = "TradeImportDCPaymentData"
+    MODULE_DATA = "TradeImportLCIssueVerifyAuthData"
     # Instance variable from MODULE_DATA object
-    MODULE_INSTANCE = "importDCPayment"
+    MODULE_INSTANCE = "importLCIssueVerifyAuth"
     # Enum class name
-    MODULE_ENUM = "TradeImportDCPaymentEnum"
-    """//\\//\\//\\//\\//\\//\\//\\//\\//\\"""
+    MODULE_ENUM = "TradeImportLCIssueVerifyAuthDataEnum"
+
     generate_read_function(MODULE_DATA,MODULE_INSTANCE,MODULE_ENUM)
