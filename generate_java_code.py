@@ -62,6 +62,8 @@ if __name__ == "__main__":
        Generated text files are enum_variables.txt & java_variables.txt"""
 
     # Data sheet path
+    # Add r before file_path if you run this code on windows
+    
     file_path = "/home/ehab/Desktop/NBKE/nbkautomation/NBKAutomationIE/resources/TestData/Trade/Trade-Import-LC-Issuance-Verify-Auth/Trade-Import-LC-Issuance-Verify-Auth.xls"
     # Sheet number
     sheet_number = 'Sheet1'
