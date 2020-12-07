@@ -4,7 +4,9 @@ import itertools
 
 
 df = pd.read_excel("/home/ehab/Downloads/NNII.xlsx", header=None)
+df.columns = ['TestName', 'Data']
 
+# generate n/a combination
 def na_combination(l):
     yield from itertools.product(*([l] * 3))
 
@@ -20,7 +22,7 @@ def save_app_header():
     global rows_meta_idx
 
     data_string = "Required Data Fields"
-    rows_meta_idx = list(df[1][df[1] == data_string].index)
+    rows_meta_idx = list(df['Data'][df['Data'] == data_string].index)
     row_meta_data = []
 
     app_list_obj = []
@@ -31,20 +33,38 @@ def save_app_header():
 # drop app header
 df_wo_app_header  = None
 def drop_app_header():
-    global df_wo_app_header
+    global df_wo_app_header 
 
     df_wo_app_header = df.drop(index=rows_meta_idx)
 
-def glamour_testcases():
-    df_data = df_wo_app_header[1].values
-    for i in df_data:
-        if str(i) == "nan":
-            print(i)
+def glamour_testcases_cuz_im_too_lazy():
+    
+    # handel delete test cases
+    nan_data_ser = (df_wo_app_header.Data.isnull())
+    nan_testcase_ser = df_wo_app_header.loc[nan_data_ser, 'TestName']
 
-    # TODO: ^ Update the N/A validation list with other cases
+    for nan_testcase_idx in nan_testcase_ser.index:
+        updated_nan_testcase = "Delete " + nan_testcase_ser[nan_testcase_idx].title() + " Feature"
+        nan_testcase_ser[nan_testcase_idx] = updated_nan_testcase
+        df_wo_app_header.at[nan_testcase_idx, "TestName"] = nan_testcase_ser[nan_testcase_idx]
 
+    # handel other test cases
+    data_ser = (df_wo_app_header.Data.notnull())
+    testcase_ser = df_wo_app_header.loc[data_ser, 'TestName']
+    
+    for testcase_idx in testcase_ser.index:
+        if type(testcase_ser[testcase_idx]) is not float:
+            updated_testcase = "Setup " + testcase_ser[testcase_idx].title() + " Feature"
+            testcase_ser[testcase_idx] = updated_testcase
+            df_wo_app_header.at[testcase_idx, "TestName"] = testcase_ser[testcase_idx]
+
+    # glowing it all back together
+    print(df)
+    print(df_wo_app_header)
+
+# TODO: save df back to excel
+    
 if __name__ == "__main__":
     save_app_header()
     drop_app_header()
-    glamour_testcases()
-    #print(make_na_list("n/a"))
+    glamour_testcases_cuz_im_too_lazy()
