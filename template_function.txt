@@ -1,0 +1,27 @@
+public static MODULE_DATA[] getMODULE_DATA(String filePath, String sheetName) {
+
+		try {
+			openExcell(filePath, sheetName);
+			readFields();
+			readTestdata();
+			//TestData testData =new TestData();
+			//
+
+			MODULE_DATA[] MODULE_INSTANCE = new MODULE_DATA[data.size()];
+			//testData.setLimit(limits[0]);
+
+			for (int i = 0 ; i<data.size() ; i++) {
+				MODULE_INSTANCE[i] = new MODULE_DATA();
+				
+				
+			}
+			closeExcel();
+			return MODULE_INSTANCE;
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			System.err.println("Could not get data from excel sheet");
+		}
+		return null;
+	}
