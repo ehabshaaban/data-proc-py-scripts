@@ -50,6 +50,7 @@ EXPEC_RES_CODE = ["1 - Approved"
 
 excel = {'TC ID': [],
         'TC Name': [],
+        'TC Description': [],
         'Precondition': [],
         'Test Data': [],
         'Test Steps': [],
@@ -80,7 +81,8 @@ def cooking_machine():
                                         #print(tc)
                                         excel.append(
                                             {'TC ID' : str(count),
-                                            'TC Name' : "Validate "+ transaction[5:]+" transaction code for "+bnk_name+" bank using protocol "+bnk_pro+" from "+bnk_product+" card with flow "+bnk_flow,
+                                            'TC Name' : bnk_name+"_"+bnk_pro+"_"+bnk_type+"_"+bnk_ser+"_"+bnk_product+"_"+bnk_flow+"_"+transaction+"_"+mode+"_"+res_code,
+                                            'TC Description' : "Validate "+ transaction[5:]+" transaction code for "+bnk_name+" bank using protocol "+bnk_pro+" from "+bnk_product+" card with flow "+bnk_flow,
                                             'Precondition' : "* Transaction from "+bnk_name+" bank\n"+"* Protocol "+bnk_pro+"\n"+"* Card type "+bnk_product+"\n"+"* Flow "+bnk_flow+"\n"+"* Transaction type: "+transaction[5:]+"\n"+"* Entry mode: "+mode,
                                             'Test Data' : "* Bank "+bnk_name+"\n"+"* Protocol "+bnk_pro+"\n"+"* Card "+bnk_product,
                                             'Test Steps' : "* Prepare "+bnk_ser+" service\n"+"* Insert card with type "+bnk_product+"\n"+"* Enter PIN Code\n"+"* Initiate the "+transaction[5:]+"\n   request by sending the corresponding iso format",
@@ -94,4 +96,4 @@ if __name__ == "__main__":
     cooking_machine()
     print(len(df.index), count)
     print(df.head())    
-    df.to_excel("output.xlsx")
+    df.to_excel("/home/ehab/Desktop/script/tc_für_heute.xlsx")
