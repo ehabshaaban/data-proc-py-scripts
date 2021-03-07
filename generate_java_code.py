@@ -1,3 +1,5 @@
+"""this script needs template_function.txt"""
+
 import pandas as pd
 
 def generate_data_variables_and_enums(file_path, sheet_number):
