@@ -1,7 +1,7 @@
-# this script needs template_function.txt
 """
 generate_java_code surprisingly generates java classes, data variables & enums for e2e test framework
 """
+# this script needs template_function.txt
 
 import pandas as pd
 
