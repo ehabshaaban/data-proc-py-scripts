@@ -1,3 +1,7 @@
+"""
+glamour_testcases_cuz_im_too_lazy is doing some systematic styling on a test report that is really annoying to do manually
+"""
+
 import pandas as pd
 import numpy as np
 import itertools

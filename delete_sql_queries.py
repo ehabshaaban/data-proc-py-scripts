@@ -1,3 +1,10 @@
+"""
+delete_sql_queries is receiving file_path
+file has lots of sql insert queries
+it will process file content and generate
+delete queries and write them in delete_queries.txt
+"""
+
 import re
 
 def generate_sql_file(file_path):

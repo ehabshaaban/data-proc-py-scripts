@@ -1,3 +1,9 @@
+"""
+concat_em_all is reading a directory `folder_path`
+directory has automatically generated excel reports
+it will concat all data and write it in new file
+"""
+
 from datetime import datetime
 import pandas as pd
 import os

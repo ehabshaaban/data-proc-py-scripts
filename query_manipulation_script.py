@@ -1,3 +1,8 @@
+"""
+executing queries on a laggy jbase shell was the most dreadful experience ever
+fastest way was to use query_manipulation_script to generate those queries and paste them
+"""
+
 #Importing tKinter module
 from tkinter import *
 from tkinter import messagebox
