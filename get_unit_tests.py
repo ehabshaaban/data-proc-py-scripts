@@ -1,9 +1,8 @@
-"""Unit tests retriever
-    - [x] list all spec files under path
-    - [x] fetch all it(), test()
-        - [x] del id > , 'C  > [C
-        - [x] del nonrelevant
-    - [x] trim testcase names > it( > @Test(
+"""Unit tests retriever needs '-p'
+-p, path: is a flag for a directory of a code base that should contain unit tests
+get_unit_tests will fetch those tests and log them with their modules and paths for reporting reasons
+
+ex: python3 get_unit_tests -p /home/cerebral/cs/app-frontends/apps/
 """
 
 import re
